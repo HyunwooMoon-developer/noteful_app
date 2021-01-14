@@ -12,13 +12,12 @@ export default class NotePageMain extends React.Component {
   }
   static contextType = ApiContext
 
-  handleDeleteNote = noteId => {
+  handleDeleteNote = note_id => {
     this.props.history.push(`/`)
   }
 
   render() {
     const { notes=[] } = this.context
-    console.log(notes);
     const { note_id } = this.props.match.params
     const note = findNote(notes, note_id) || { content: '' }
     return (

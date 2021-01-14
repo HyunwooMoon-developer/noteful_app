@@ -19,8 +19,8 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/notes`),
-      fetch(`${config.API_ENDPOINT}/folders`)
+      fetch(`${config.NOTE_ENDPOINT}`),
+      fetch(`${config.FOLDER_ENDPOINT}`)
     ])
       .then(([notesRes, foldersRes]) => {
         if (!notesRes.ok)
@@ -61,14 +61,14 @@ class App extends Component {
 
   handleDeleteNote = noteId => {
     this.setState({
-      notes: this.state.notes.filter(note => note.id !== noteId)
+      notes: this.state.notes.filter(note => note.note_id !== noteId)
     })
   }
 
   renderNavRoutes() {
     return (
       <>
-        {['/', '/folder/:folderId'].map(path =>
+        {['/', '/folders/:folderId'].map(path =>
           <Route
             exact
             key={path}
@@ -77,7 +77,7 @@ class App extends Component {
           />
         )}
         <Route
-          path='/note/:noteId'
+          path='/notes/:noteId'
           component={NotePageNav}
         />
         <Route
@@ -95,7 +95,7 @@ class App extends Component {
   renderMainRoutes() {
     return (
       <>
-        {['/', '/folder/:folderId'].map(path =>
+        {['/', '/folders/:folderId'].map(path =>
           <Route
             exact
             key={path}
@@ -104,7 +104,7 @@ class App extends Component {
           />
         )}
         <Route
-          path='/note/:noteId'
+          path='/notes/:noteId'
           component={NotePageMain}
         />
         <Route

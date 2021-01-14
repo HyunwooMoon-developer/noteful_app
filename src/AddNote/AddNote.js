@@ -32,9 +32,9 @@ export default class AddNote extends Component {
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
-      .then(data => {
-        this.context.addNote(data)
-        this.props.history.push(`/`)
+      .then(note => {
+        this.context.addNote(note)
+        this.props.history.push(`/notes/${note.note_id}`)
       })
       .catch(error => {
         console.error({ error })

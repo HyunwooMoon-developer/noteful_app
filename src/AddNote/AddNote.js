@@ -15,12 +15,12 @@ export default class AddNote extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const newNote = {
-      name: e.target['note-name'].value,
+      note_name: e.target['note-name'].value,
       content: e.target['note-content'].value,
       folder_id: e.target['note-folder-id'].value,
       modified: new Date(),
     }
-    fetch(config.NOTE_ENDPOINT, {
+    fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -32,9 +32,9 @@ export default class AddNote extends Component {
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
-      .then(note => {
-        this.context.addNote(note)
-        this.props.history.push(`/folder/${note.folderId}`)
+      .then(data => {
+        this.context.addNote(data)
+        this.props.history.push(`/`)
       })
       .catch(error => {
         console.error({ error })

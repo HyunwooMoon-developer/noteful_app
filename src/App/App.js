@@ -17,10 +17,10 @@ class App extends Component {
     folders: [],
   };
 
-  componentDidMount() {
+  fetchAll =() => {
     Promise.all([
-      fetch(`${config.NOTE_ENDPOINT}`),
-      fetch(`${config.FOLDER_ENDPOINT}`)
+      fetch(`${config.API_ENDPOINT}/notes`),
+      fetch(`${config.API_ENDPOINT}/folders`)
     ])
       .then(([notesRes, foldersRes]) => {
         if (!notesRes.ok)
@@ -68,7 +68,7 @@ class App extends Component {
   renderNavRoutes() {
     return (
       <>
-        {['/', '/folders/:folderId'].map(path =>
+        {['/', '/folders/:folder_id'].map(path =>
           <Route
             exact
             key={path}
@@ -77,7 +77,7 @@ class App extends Component {
           />
         )}
         <Route
-          path='/notes/:noteId'
+          path='/notes/:note_id'
           component={NotePageNav}
         />
         <Route
@@ -95,7 +95,7 @@ class App extends Component {
   renderMainRoutes() {
     return (
       <>
-        {['/', '/folders/:folderId'].map(path =>
+        {['/', '/folders/:folder_id'].map(path =>
           <Route
             exact
             key={path}
@@ -104,7 +104,7 @@ class App extends Component {
           />
         )}
         <Route
-          path='/notes/:noteId'
+          path='/notes/:note_id'
           component={NotePageMain}
         />
         <Route
@@ -119,6 +119,9 @@ class App extends Component {
     )
   }
 
+  componentDidMount(){
+    this.fetchAll()
+  }
   render() {
     const value = {
       notes: this.state.notes,
@@ -126,6 +129,7 @@ class App extends Component {
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
       deleteNote: this.handleDeleteNote,
+      fetchAll : this.fetchAll,
     }
     return (
       <ApiContext.Provider value={value}>

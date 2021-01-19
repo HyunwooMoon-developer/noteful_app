@@ -17,7 +17,7 @@ class App extends Component {
     folders: [],
   };
 
-  fetchAll =() => {
+  componentDidMount() {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/api/notes`),
       fetch(`${config.API_ENDPOINT}/api/folders`)
@@ -119,9 +119,9 @@ class App extends Component {
     )
   }
 
-  componentDidMount(){
+  /*componentDidMount(){
     this.fetchAll()
-  }
+  }*/
   render() {
     const value = {
       notes: this.state.notes,
@@ -129,7 +129,7 @@ class App extends Component {
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
       deleteNote: this.handleDeleteNote,
-      fetchAll : this.fetchAll,
+     // fetchAll : this.fetchAll,
     }
     return (
       <ApiContext.Provider value={value}>

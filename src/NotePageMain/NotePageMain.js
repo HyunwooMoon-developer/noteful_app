@@ -19,9 +19,9 @@ export default class NotePageMain extends React.Component {
   render() {
     const { notes=[] } = this.context
     //const noteId = this.props.match.params.note_id
-    const noteId = this.props.match.params.note_id
+    const noteId = Number(this.props.match.params.note_id)
     const note =  findNote(notes, noteId) || { content: '' }
-    console.log("note :" , notes, noteId )
+    console.log("note :" , notes, noteId, note )
     return (
       <section className='NotePageMain'>
         <Note
@@ -32,9 +32,9 @@ export default class NotePageMain extends React.Component {
         />
        
         <div className='NotePageMain__content'>
-          {/* {note.content.split(/\n \r|\n/).map((para, i) =>
+         {note.content.split(/\n \r|\n/).map((para, i) =>
             <p key={i}>{para}</p>
-          )} */}
+          )}
         </div>
       </section>
     )

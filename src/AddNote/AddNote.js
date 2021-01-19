@@ -34,7 +34,7 @@ export default class AddNote extends Component {
       })
       .then(note => {
         this.context.addNote(note)
-        this.props.history.push(`/api/notes/${note.note_id}`)
+        this.props.history.push(`/notes/${note.note_id}`)
       })
       .catch(error => {
         console.error({ error })

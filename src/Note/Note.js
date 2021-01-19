@@ -8,6 +8,10 @@ import './Note.css'
 
 export default class Note extends React.Component {
   static defaultProps ={
+    history : {
+      push: ()=> {}
+    }
+    ,
     onDeleteNote: () => {},
   }
   static contextType = ApiContext;
@@ -24,15 +28,24 @@ export default class Note extends React.Component {
       },
     })
       .then(res => {
-        if (!res.ok)
+        if (!res.ok){
           return res.json().then(e => Promise.reject(e))
-          return res.json()
+        }
+       // console.log(res.body)
+       // return res.json()
       })
-      .then(()=> {
+      /*.then(()=> {
         
         this.context.deleteNote(noteId)
         // allow parent to perform extra behaviour
         this.props.onDeleteNote()
+        this.props.history.push('/')
+      })*/
+      .then(()=> {
+        return this.context.fetchAll();
+      })
+      .then(()=> {
+        return this.props.history.push('/');
       })
       .catch(error => {
         console.error({ error })
@@ -44,7 +57,7 @@ export default class Note extends React.Component {
     return (
       <div className='Note'>
         <h2 className='Note__title'>
-          <Link to={`/api/notes/${note_id}`}>
+          <Link to={`/notes/${note_id}`}>
             {note_name}
           </Link>
         </h2>

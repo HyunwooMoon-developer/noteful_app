@@ -32,7 +32,7 @@ export default class AddFolder extends Component {
       .then(data => {
         console.log(data)
         this.context.addFolder(data)
-        this.props.history.push(`/api/folders/${data.folder_id}`)
+        this.props.history.push(`/folders/${data.folder_id}`)
       })
       .catch(error => {
         console.error({ error })

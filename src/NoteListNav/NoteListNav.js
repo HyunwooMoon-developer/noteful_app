@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink , Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
@@ -11,6 +11,8 @@ export default class NoteListNav extends React.Component {
 
   render() {
     const { folders=[], notes=[] } = this.context
+    //console.log('folder/folder_id : ', this.context)
+    //console.log('folders,folder_id : ' , folders)
     return (
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>

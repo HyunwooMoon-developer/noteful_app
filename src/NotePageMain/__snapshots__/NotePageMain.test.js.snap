@@ -4,7 +4,14 @@ exports[`NotePageMain component renders a .NotePageMain by default 1`] = `
 <section
   className="NotePageMain"
 >
-  <Note />
+  <Note
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    onDeleteNote={[Function]}
+  />
   <div
     className="NotePageMain__content"
   >
